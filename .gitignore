@@ -1,0 +1,15 @@
+# File temporanei di sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Cartelle di configurazione IDE ed editor
+.vscode/
+.idea/
+.gemini/
+*.log
+
+# File di backup temporanei
+*~
+*.bak

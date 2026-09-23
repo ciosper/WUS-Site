@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galleria Fotografica | Wellfit Union Sport Basket Breda di Piave</title>
+  <meta name="description" content="Foto ufficiali e immagini spettacolari della Wellfit Union Sport: partite, minibasket, vittorie, tornei ed eventi al Palasport di Breda di Piave.">
+  <meta name="keywords" content="Foto Basket Breda di Piave, Galleria Fotografica Wellfit, Immagini Minibasket Treviso, Tornei Basket">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Galleria Fotografica | Wellfit Union Sport">
+  <meta property="og:description" content="Gli scatti più belli della stagione: azioni di gioco, esultanze ed eventi della Wellfit Union Sport a Breda di Piave.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/gallery_tournament.jpg">
+
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement-bar" id="announcementBar">
+    <div class="container announcement-inner">
+      <span class="announcement-badge"><i class="fa-solid fa-basketball fa-spin"></i> PROSSIMO TURNO CASALINGO</span>
+      <p class="announcement-text">
+        <strong>Sabato 24 Ottobre ore 20:30</strong>: Wellfit Union Sport vs Basket Oderzo al Palazzetto di Breda di Piave! Ingresso libero.
+      </p>
+      <a href="calendario.html" class="announcement-link">Vedi Calendario <i class="fa-solid fa-arrow-right"></i></a>
+      <button class="announcement-close" id="closeAnnouncement" aria-label="Chiudi avviso">&times;</button>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" aria-label="Wellfit Union Sport Home">
+        <div class="logo-shield">
+          <i class="fa-solid fa-basketball logo-ball-icon"></i>
+          <span class="logo-wings">WUS</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+          <span class="brand-sub">BASKET • BREDA DI PIAVE</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Navigazione principale">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="squadre.html" class="nav-link">Squadre</a></li>
+          <li><a href="calendario.html" class="nav-link">Calendario & Risultati</a></li>
+          <li><a href="galleria.html" class="nav-link active">Galleria</a></li>
+          <li><a href="sponsor.html" class="nav-link">Sponsor</a></li>
+          <li><a href="contatti.html" class="nav-link">Contatti</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contatti.html" class="btn btn-primary btn-sm header-cta">
+          <i class="fa-solid fa-id-card"></i> Richiedi Prova
+        </a>
+        <button class="mobile-toggle-btn" id="mobileMenuBtn" aria-label="Apri menu navigazione">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="mobile-drawer-header">
+        <div class="brand-text">
+          <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+          <span class="brand-sub">Breda di Piave (TV)</span>
+        </div>
+        <button class="drawer-close-btn" id="closeDrawerBtn" aria-label="Chiudi menu">&times;</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="squadre.html" class="mobile-nav-link"><i class="fa-solid fa-users"></i> Le Squadre</a></li>
+        <li><a href="calendario.html" class="mobile-nav-link"><i class="fa-solid fa-calendar-days"></i> Calendario Partite</a></li>
+        <li><a href="galleria.html" class="mobile-nav-link active"><i class="fa-solid fa-images"></i> Galleria Foto</a></li>
+        <li><a href="sponsor.html" class="mobile-nav-link"><i class="fa-solid fa-handshake"></i> I Nostri Sponsor</a></li>
+        <li><a href="contatti.html" class="mobile-nav-link"><i class="fa-solid fa-location-dot"></i> Dove Siamo & Contatti</a></li>
+      </ul>
+      <div class="mobile-drawer-footer">
+        <a href="contatti.html" class="btn btn-primary btn-block">
+          <i class="fa-solid fa-envelope"></i> Iscrizioni & Open Day
+        </a>
+        <div class="mobile-socials">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+  </header>
+
+  <main>
+    <!-- Subpage Banner -->
+    <section class="page-banner">
+      <div class="container page-banner-inner">
+        <nav class="breadcrumb-nav" aria-label="Percorso di navigazione">
+          <ol class="breadcrumb-list">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li class="separator"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="active">Galleria Fotografica</li>
+          </ol>
+        </nav>
+        <span class="page-banner-badge"><i class="fa-solid fa-camera-retro"></i> EMOZIONI SUL PARQUET</span>
+        <h1 class="page-banner-title">Galleria <span class="gradient-text">Fotografica</span></h1>
+        <p class="page-banner-desc">
+          I momenti più belli della Wellfit Union Sport: le azioni spettacolari a canestro, le feste del Minibasket, l'agonismo giovanile e il calore dei nostri tifosi a Breda di Piave.
+        </p>
+      </div>
+    </section>
+
+    <!-- Galleria Fotografica -->
+    <section class="section section-gallery" id="galleria">
+      <div class="container">
+        
+        <!-- Filter Buttons -->
+        <div class="gallery-filters text-center">
+          <button class="filter-pill active" data-gallery-filter="all">Tutte le Foto</button>
+          <button class="filter-pill" data-gallery-filter="partite">Partite Agonistiche</button>
+          <button class="filter-pill" data-gallery-filter="giovani">Minibasket & Giovanili</button>
+          <button class="filter-pill" data-gallery-filter="feste">Tornei & Premiazioni</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+          
+          <!-- Item 1: Hero Dunk Action -->
+          <div class="gallery-item" data-category="partite" data-caption="Schiacciata spettacolare al Palazzetto dello Sport di Breda di Piave durante il derby regionale">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/hero_basket.jpg" alt="Azione spettacolare con schiacciata a canestro" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">Partite</span>
+                <p class="gallery-caption-preview">Schiacciata spettacolare</p>
+                <button class="gallery-zoom-btn" aria-label="Ingrandisci foto"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2: Youth Award Celebration -->
+          <div class="gallery-item" data-category="feste" data-caption="Trionfo al Torneo di Primavera: i giovani atleti alzano con orgoglio la coppa dei campioni">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/gallery_tournament.jpg" alt="Premiazione torneo giovanile con coppa e coriandoli" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">Tornei</span>
+                <p class="gallery-caption-preview">Vittoria Torneo Giovanile</p>
+                <button class="gallery-zoom-btn" aria-label="Ingrandisci foto"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Senior Team Cheering -->
+          <div class="gallery-item" data-category="partite" data-caption="L'esultanza della Prima Squadra Senior dopo la straordinaria vittoria nel derby casalingo">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/team_senior.jpg" alt="Festa della prima squadra per la vittoria" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">Partite</span>
+                <p class="gallery-caption-preview">Vittoria Derby Prima Squadra</p>
+                <button class="gallery-zoom-btn" aria-label="Ingrandisci foto"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4: Fast Break Layout & Block -->
+          <div class="gallery-item" data-category="partite" data-caption="Duello ad alta quota sotto il ferro durante la fase decisiva dell'ultimo quarto di gioco">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/gallery_action.jpg" alt="Azione difensiva ad alta quota e stoppata a canestro" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">Partite</span>
+                <p class="gallery-caption-preview">Duello sotto canestro</p>
+                <button class="gallery-zoom-btn" aria-label="Ingrandisci foto"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 5: Minibasket Smiles -->
+          <div class="gallery-item" data-category="giovani" data-caption="Sorrisi, gioco e primi canestri: il vivace gruppo Minibasket della Wellfit Union Sport">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/team_minibasket.jpg" alt="Bambini del Minibasket che giocano felici sul parquet" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">Minibasket</span>
+                <p class="gallery-caption-preview">Festa Minibasket a Breda</p>
+                <button class="gallery-zoom-btn" aria-label="Ingrandisci foto"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 6: Under 14 Huddle -->
+          <div class="gallery-item" data-category="giovani" data-caption="Unione, concentrazione e spirito di squadra: l'Under 14 riceve le indicazioni del coach">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/team_under14.jpg" alt="Under 14 unita a centrocampo col coach" loading="lazy">
+              <div class="gallery-overlay">
+                <span class="gallery-tag">Giovanili</span>
+                <p class="gallery-caption-preview">Cerchio Under 14 col Coach</p>
+                <button class="gallery-zoom-btn" aria-label="Ingrandisci foto"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Banner per invio foto -->
+        <div class="open-day-banner" style="margin-top: 55px;">
+          <div class="banner-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+          <div class="banner-text">
+            <h4>Hai scattato foto o registrato video durante le partite?</h4>
+            <p>Invia i tuoi scatti migliori alla nostra redazione: verranno pubblicati sui canali social ufficiali e selezionati per la galleria del sito!</p>
+          </div>
+          <a href="contatti.html" class="btn btn-primary banner-cta"><i class="fa-solid fa-paper-plane"></i> Invia Scatti</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-col footer-about">
+          <div class="brand-logo footer-logo">
+            <div class="logo-shield">
+              <i class="fa-solid fa-basketball logo-ball-icon"></i>
+              <span class="logo-wings">WUS</span>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+              <span class="brand-sub">BREDA DI PIAVE (TREVISO)</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Associazione Sportiva Dilettantistica affiliata alla Federazione Italiana Pallacanestro (FIP). Promuoviamo lo sport, la socialità e il benessere fisico attraverso il basket dal minibasket al settore senior.
+          </p>
+          <div class="footer-social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://wa.me/393471234567" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Navigazione</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home Page</a></li>
+            <li><a href="squadre.html"><i class="fa-solid fa-angle-right"></i> Categorie e Squadre</a></li>
+            <li><a href="calendario.html"><i class="fa-solid fa-angle-right"></i> Calendario Partite</a></li>
+            <li><a href="galleria.html"><i class="fa-solid fa-angle-right"></i> Galleria Foto</a></li>
+            <li><a href="sponsor.html"><i class="fa-solid fa-angle-right"></i> Sostenitori & Sponsor</a></li>
+            <li><a href="contatti.html"><i class="fa-solid fa-angle-right"></i> Contatti & Dove Siamo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Le Nostre Categorie</h4>
+          <ul class="footer-links">
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="minibasket"><i class="fa-solid fa-shapes"></i> Minibasket (5 - 11 anni)</a></li>
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="under14"><i class="fa-solid fa-user-group"></i> Under 14 FIP Treviso</a></li>
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="senior"><i class="fa-solid fa-star"></i> Prima Squadra Senior</a></li>
+            <li><a href="contatti.html"><i class="fa-solid fa-calendar-plus"></i> Prove Gratuite Open Day</a></li>
+            <li><a href="sponsor.html"><i class="fa-solid fa-handshake"></i> Diventa Sponsor</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Dati Societari</h4>
+          <p class="footer-tax-info">
+            <strong>A.S.D. Wellfit Union Sport</strong><br>
+            Palazzetto dello Sport - Via delle Magnolie<br>
+            31030 Breda di Piave (TV)<br>
+            C.F. / P.IVA: 04891230268<br>
+            Codice Affiliazione FIP: 054129
+          </p>
+          <div class="fip-logo-badge">
+            <i class="fa-solid fa-shield-halved"></i> Società Affiliata FIP Veneto
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 Wellfit Union Sport Breda di Piave. Tutti i diritti riservati.</p>
+        <p class="footer-credits">
+          Passione per il Basket • Sviluppato per la comunità di Breda di Piave
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal per Galleria Fotografica -->
+  <div class="lightbox-overlay" id="lightboxModal" aria-hidden="true">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="closeLightbox" aria-label="Chiudi galleria">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="prevLightbox" aria-label="Foto precedente"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="lightbox-nav lightbox-next" id="nextLightbox" aria-label="Foto successiva"><i class="fa-solid fa-chevron-right"></i></button>
+      
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="" id="lightboxImg">
+      </div>
+      <div class="lightbox-caption" id="lightboxCaption">
+        <!-- Caption testuale -->
+      </div>
+      <div class="lightbox-counter" id="lightboxCounter">1 / 6</div>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="backToTopBtn" aria-label="Torna su">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript Script -->
+  <script src="js/main.js"></script>
+</body>
+</html>

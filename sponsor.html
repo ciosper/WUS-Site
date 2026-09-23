@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Nostri Sponsor & Partner | Wellfit Union Sport Basket Breda di Piave</title>
+  <meta name="description" content="Scopri i partner e gli sponsor ufficiali della Wellfit Union Sport a Breda di Piave (Treviso). Le aziende che sostengono il basket giovanile e i valori dello sport.">
+  <meta name="keywords" content="Sponsor Basket Breda di Piave, Partner Wellfit Union Sport, Sponsorizzazioni Sportive Treviso, Basket Veneto">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="I Nostri Sponsor & Partner | Wellfit Union Sport">
+  <meta property="og:description" content="Le realtà produttive e commerciali che investono nei giovani atleti e nella pallacanestro a Breda di Piave. Diventa partner.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/hero_basket.jpg">
+
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement-bar" id="announcementBar">
+    <div class="container announcement-inner">
+      <span class="announcement-badge"><i class="fa-solid fa-basketball fa-spin"></i> PROSSIMO TURNO CASALINGO</span>
+      <p class="announcement-text">
+        <strong>Sabato 24 Ottobre ore 20:30</strong>: Wellfit Union Sport vs Basket Oderzo al Palazzetto di Breda di Piave! Ingresso libero.
+      </p>
+      <a href="calendario.html" class="announcement-link">Vedi Calendario <i class="fa-solid fa-arrow-right"></i></a>
+      <button class="announcement-close" id="closeAnnouncement" aria-label="Chiudi avviso">&times;</button>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" aria-label="Wellfit Union Sport Home">
+        <div class="logo-shield">
+          <i class="fa-solid fa-basketball logo-ball-icon"></i>
+          <span class="logo-wings">WUS</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+          <span class="brand-sub">BASKET • BREDA DI PIAVE</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Navigazione principale">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="squadre.html" class="nav-link">Squadre</a></li>
+          <li><a href="calendario.html" class="nav-link">Calendario & Risultati</a></li>
+          <li><a href="galleria.html" class="nav-link">Galleria</a></li>
+          <li><a href="sponsor.html" class="nav-link active">Sponsor</a></li>
+          <li><a href="contatti.html" class="nav-link">Contatti</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contatti.html" class="btn btn-primary btn-sm header-cta">
+          <i class="fa-solid fa-id-card"></i> Richiedi Prova
+        </a>
+        <button class="mobile-toggle-btn" id="mobileMenuBtn" aria-label="Apri menu navigazione">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="mobile-drawer-header">
+        <div class="brand-text">
+          <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+          <span class="brand-sub">Breda di Piave (TV)</span>
+        </div>
+        <button class="drawer-close-btn" id="closeDrawerBtn" aria-label="Chiudi menu">&times;</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="squadre.html" class="mobile-nav-link"><i class="fa-solid fa-users"></i> Le Squadre</a></li>
+        <li><a href="calendario.html" class="mobile-nav-link"><i class="fa-solid fa-calendar-days"></i> Calendario Partite</a></li>
+        <li><a href="galleria.html" class="mobile-nav-link"><i class="fa-solid fa-images"></i> Galleria Foto</a></li>
+        <li><a href="sponsor.html" class="mobile-nav-link active"><i class="fa-solid fa-handshake"></i> I Nostri Sponsor</a></li>
+        <li><a href="contatti.html" class="mobile-nav-link"><i class="fa-solid fa-location-dot"></i> Dove Siamo & Contatti</a></li>
+      </ul>
+      <div class="mobile-drawer-footer">
+        <a href="contatti.html" class="btn btn-primary btn-block">
+          <i class="fa-solid fa-envelope"></i> Iscrizioni & Open Day
+        </a>
+        <div class="mobile-socials">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+  </header>
+
+  <main>
+    <!-- Subpage Banner -->
+    <section class="page-banner">
+      <div class="container page-banner-inner">
+        <nav class="breadcrumb-nav" aria-label="Percorso di navigazione">
+          <ol class="breadcrumb-list">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li class="separator"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="active">I Nostri Sponsor</li>
+          </ol>
+        </nav>
+        <span class="page-banner-badge"><i class="fa-solid fa-handshake-angle"></i> GRAZIE AI NOSTRI SOSTENITORI</span>
+        <h1 class="page-banner-title">I Nostri <span class="gradient-text">Partner & Sponsor</span></h1>
+        <p class="page-banner-desc">
+          Le aziende e le eccellenze produttive della Marca Trevigiana che condividono la nostra visione educativa e investono con passione nel futuro dei giovani di Breda di Piave.
+        </p>
+      </div>
+    </section>
+
+    <!-- Spazi per Sponsor e Partner -->
+    <section class="section section-sponsors" id="sponsor">
+      <div class="container">
+        
+        <!-- Main Sponsor -->
+        <div class="sponsor-tier-wrapper main-tier">
+          <span class="sponsor-tier-label"><i class="fa-solid fa-crown"></i> MAIN SPONSOR UFFICIALI</span>
+          <div class="sponsors-grid main-grid">
+            <div class="sponsor-card primary-sponsor">
+              <div class="sponsor-card-inner">
+                <div class="sponsor-logo-emblem"><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="sponsor-info">
+                  <h4 class="sponsor-brand">WELLFIT HEALTH & FITNESS</h4>
+                  <span class="sponsor-type">Centro Fitness, Benessere, Rieducazione Funzionale & Sport</span>
+                  <span class="sponsor-loc"><i class="fa-solid fa-map-pin"></i> Breda di Piave (TV)</span>
+                </div>
+              </div>
+            </div>
+            <div class="sponsor-card primary-sponsor">
+              <div class="sponsor-card-inner">
+                <div class="sponsor-logo-emblem"><i class="fa-solid fa-gears"></i></div>
+                <div class="sponsor-info">
+                  <h4 class="sponsor-brand">BREDA MECCANICA SRL</h4>
+                  <span class="sponsor-type">Precision Engineering, Automazioni & Soluzioni Industriali</span>
+                  <span class="sponsor-loc"><i class="fa-solid fa-map-pin"></i> Zona Industriale Breda di Piave</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gold Sponsor -->
+        <div class="sponsor-tier-wrapper gold-tier">
+          <span class="sponsor-tier-label"><i class="fa-solid fa-award"></i> GOLD PARTNER DEL TERRITORIO</span>
+          <div class="sponsors-grid gold-grid">
+            <div class="sponsor-card">
+              <div class="sponsor-card-inner">
+                <i class="fa-solid fa-landmark sponsor-sub-icon"></i>
+                <h5 class="sponsor-brand">Banca Prealpi SanBiagio</h5>
+                <span class="sponsor-type">Credito Cooperativo & Sviluppo del Territorio</span>
+              </div>
+            </div>
+            <div class="sponsor-card">
+              <div class="sponsor-card-inner">
+                <i class="fa-solid fa-house-chimney-medical sponsor-sub-icon"></i>
+                <h5 class="sponsor-brand">Farmacia Comunale Breda</h5>
+                <span class="sponsor-type">Salute, Benessere, Integratori & Sport</span>
+              </div>
+            </div>
+            <div class="sponsor-card">
+              <div class="sponsor-card-inner">
+                <i class="fa-solid fa-car sponsor-sub-icon"></i>
+                <h5 class="sponsor-brand">Treviso Auto Motors</h5>
+                <span class="sponsor-type">Concessionaria Ufficiale per la Marca Trevigiana</span>
+              </div>
+            </div>
+            <div class="sponsor-card">
+              <div class="sponsor-card-inner">
+                <i class="fa-solid fa-wheat-awn sponsor-sub-icon"></i>
+                <h5 class="sponsor-brand">Molino & Panificio del Piave</h5>
+                <span class="sponsor-type">Tradizione Artigianale e Prodotti Genuini Locali</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Partners -->
+        <div class="sponsor-tier-wrapper technical-tier">
+          <span class="sponsor-tier-label"><i class="fa-solid fa-shirt"></i> PARTNER TECNICI & MEDICI</span>
+          <div class="sponsors-grid tech-grid">
+            <div class="sponsor-badge-item">
+              <i class="fa-solid fa-vest-patches"></i>
+              <span>Erreà Sport - Official Apparel & Kit Tecnico</span>
+            </div>
+            <div class="sponsor-badge-item">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span>Piave Trasporti & Logistica Giovanile</span>
+            </div>
+            <div class="sponsor-badge-item">
+              <i class="fa-solid fa-heart-pulse"></i>
+              <span>FisioPiave - Studio Fisioterapia & Riabilitazione</span>
+            </div>
+            <div class="sponsor-badge-item">
+              <i class="fa-solid fa-pizza-slice"></i>
+              <span>Pizzeria Ristorante Da Sergio (Breda di Piave)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vantaggi per i Partner Commerciali -->
+        <div class="sponsor-benefits-section">
+          <div class="section-header text-center">
+            <span class="section-badge"><i class="fa-solid fa-chart-line"></i> CRESCERE INSIEME</span>
+            <h3 class="section-title">Perché Diventare <span class="gradient-text">Nostro Partner?</span></h3>
+            <p class="section-description">
+              Sostenere la Wellfit Union Sport significa posizionare il proprio brand al centro della vita della comunità di Breda di Piave e della Marca Trevigiana.
+            </p>
+          </div>
+
+          <div class="sponsor-benefits-grid">
+            <div class="sponsor-benefit-card">
+              <div class="benefit-icon"><i class="fa-solid fa-eye"></i></div>
+              <h4>Grande Visibilità Locale</h4>
+              <p>Striscioni a bordo campo al Palasport di Breda di Piave, logo sulle divise di gioco ufficiali e presenza costante nei nostri canali social seguiti da centinaia di famiglie.</p>
+            </div>
+            <div class="sponsor-benefit-card">
+              <div class="benefit-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+              <h4>Vantaggi Fiscali al 100%</h4>
+              <p>I contributi e le sponsorizzazioni alle Associazioni Sportive Dilettantistiche (ASD) sono interamente deducibili come spese di pubblicità ai sensi della normativa vigente.</p>
+            </div>
+            <div class="sponsor-benefit-card">
+              <div class="benefit-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+              <h4>Responsabilità Sociale</h4>
+              <p>Investire sul vivaio giovanile e sul Minibasket permette alla tua impresa di associare il proprio nome a uno stile di vita sano, educativo e solidale.</p>
+            </div>
+            <div class="sponsor-benefit-card">
+              <div class="benefit-icon"><i class="fa-solid fa-users"></i></div>
+              <h4>Eventi & Network</h4>
+              <p>Inviti d'onore a tutte le partite casalinghe, tornei giovanili ed eventi di beneficenza con opportunità concrete di networking tra imprenditori del territorio.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sponsor CTA Box -->
+        <div class="sponsor-callout-box" style="margin-top: 50px;">
+          <div class="callout-text">
+            <h3>Vuoi sostenere i nostri giovani atleti e dare visibilità al tuo marchio?</h3>
+            <p>Abbiamo pacchetti di sponsorizzazione su misura per ogni esigenza: Main Sponsor, Partner di Squadra o Sostenitore Tecnico.</p>
+          </div>
+          <a href="contatti.html?category=sponsor" class="btn btn-primary btn-md"><i class="fa-solid fa-envelope"></i> Richiedi la Brochure Partner</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-col footer-about">
+          <div class="brand-logo footer-logo">
+            <div class="logo-shield">
+              <i class="fa-solid fa-basketball logo-ball-icon"></i>
+              <span class="logo-wings">WUS</span>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+              <span class="brand-sub">BREDA DI PIAVE (TREVISO)</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Associazione Sportiva Dilettantistica affiliata alla Federazione Italiana Pallacanestro (FIP). Promuoviamo lo sport, la socialità e il benessere fisico attraverso il basket dal minibasket al settore senior.
+          </p>
+          <div class="footer-social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://wa.me/393471234567" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Navigazione</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home Page</a></li>
+            <li><a href="squadre.html"><i class="fa-solid fa-angle-right"></i> Categorie e Squadre</a></li>
+            <li><a href="calendario.html"><i class="fa-solid fa-angle-right"></i> Calendario Partite</a></li>
+            <li><a href="galleria.html"><i class="fa-solid fa-angle-right"></i> Galleria Foto</a></li>
+            <li><a href="sponsor.html"><i class="fa-solid fa-angle-right"></i> Sostenitori & Sponsor</a></li>
+            <li><a href="contatti.html"><i class="fa-solid fa-angle-right"></i> Contatti & Dove Siamo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Le Nostre Categorie</h4>
+          <ul class="footer-links">
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="minibasket"><i class="fa-solid fa-shapes"></i> Minibasket (5 - 11 anni)</a></li>
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="under14"><i class="fa-solid fa-user-group"></i> Under 14 FIP Treviso</a></li>
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="senior"><i class="fa-solid fa-star"></i> Prima Squadra Senior</a></li>
+            <li><a href="contatti.html"><i class="fa-solid fa-calendar-plus"></i> Prove Gratuite Open Day</a></li>
+            <li><a href="sponsor.html"><i class="fa-solid fa-handshake"></i> Diventa Sponsor</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Dati Societari</h4>
+          <p class="footer-tax-info">
+            <strong>A.S.D. Wellfit Union Sport</strong><br>
+            Palazzetto dello Sport - Via delle Magnolie<br>
+            31030 Breda di Piave (TV)<br>
+            C.F. / P.IVA: 04891230268<br>
+            Codice Affiliazione FIP: 054129
+          </p>
+          <div class="fip-logo-badge">
+            <i class="fa-solid fa-shield-halved"></i> Società Affiliata FIP Veneto
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 Wellfit Union Sport Breda di Piave. Tutti i diritti riservati.</p>
+        <p class="footer-credits">
+          Passione per il Basket • Sviluppato per la comunità di Breda di Piave
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="backToTopBtn" aria-label="Torna su">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript Script -->
+  <script src="js/main.js"></script>
+</body>
+</html>
