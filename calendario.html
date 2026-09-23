@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario Partite & Classifiche FIP | Wellfit Union Sport Basket</title>
+  <meta name="description" content="Calendario completo delle gare, risultati e classifiche ufficiali FIP della Wellfit Union Sport Basket Breda di Piave. Prima Squadra Senior, Under 14 e Minibasket.">
+  <meta name="keywords" content="Calendario Basket Treviso, Partite Wellfit Union Sport, Risultati Basket Breda di Piave, Classifica FIP Treviso">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Calendario Partite & Risultati | Wellfit Union Sport">
+  <meta property="og:description" content="Tutte le date, gli orari e i risultati delle partite della Wellfit Union Sport al Palazzetto di Breda di Piave e in trasferta.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/gallery_action.jpg">
+
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement-bar" id="announcementBar">
+    <div class="container announcement-inner">
+      <span class="announcement-badge"><i class="fa-solid fa-basketball fa-spin"></i> PROSSIMO TURNO CASALINGO</span>
+      <p class="announcement-text">
+        <strong>Sabato 24 Ottobre ore 20:30</strong>: Wellfit Union Sport vs Basket Oderzo al Palazzetto di Breda di Piave! Ingresso libero.
+      </p>
+      <a href="calendario.html" class="announcement-link">Vedi Calendario <i class="fa-solid fa-arrow-right"></i></a>
+      <button class="announcement-close" id="closeAnnouncement" aria-label="Chiudi avviso">&times;</button>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" aria-label="Wellfit Union Sport Home">
+        <div class="logo-shield">
+          <i class="fa-solid fa-basketball logo-ball-icon"></i>
+          <span class="logo-wings">WUS</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+          <span class="brand-sub">BASKET • BREDA DI PIAVE</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Navigazione principale">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="squadre.html" class="nav-link">Squadre</a></li>
+          <li><a href="calendario.html" class="nav-link active">Calendario & Risultati</a></li>
+          <li><a href="galleria.html" class="nav-link">Galleria</a></li>
+          <li><a href="sponsor.html" class="nav-link">Sponsor</a></li>
+          <li><a href="contatti.html" class="nav-link">Contatti</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contatti.html" class="btn btn-primary btn-sm header-cta">
+          <i class="fa-solid fa-id-card"></i> Richiedi Prova
+        </a>
+        <button class="mobile-toggle-btn" id="mobileMenuBtn" aria-label="Apri menu navigazione">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="mobile-drawer-header">
+        <div class="brand-text">
+          <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+          <span class="brand-sub">Breda di Piave (TV)</span>
+        </div>
+        <button class="drawer-close-btn" id="closeDrawerBtn" aria-label="Chiudi menu">&times;</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="squadre.html" class="mobile-nav-link"><i class="fa-solid fa-users"></i> Le Squadre</a></li>
+        <li><a href="calendario.html" class="mobile-nav-link active"><i class="fa-solid fa-calendar-days"></i> Calendario Partite</a></li>
+        <li><a href="galleria.html" class="mobile-nav-link"><i class="fa-solid fa-images"></i> Galleria Foto</a></li>
+        <li><a href="sponsor.html" class="mobile-nav-link"><i class="fa-solid fa-handshake"></i> I Nostri Sponsor</a></li>
+        <li><a href="contatti.html" class="mobile-nav-link"><i class="fa-solid fa-location-dot"></i> Dove Siamo & Contatti</a></li>
+      </ul>
+      <div class="mobile-drawer-footer">
+        <a href="contatti.html" class="btn btn-primary btn-block">
+          <i class="fa-solid fa-envelope"></i> Iscrizioni & Open Day
+        </a>
+        <div class="mobile-socials">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+  </header>
+
+  <main>
+    <!-- Subpage Banner -->
+    <section class="page-banner">
+      <div class="container page-banner-inner">
+        <nav class="breadcrumb-nav" aria-label="Percorso di navigazione">
+          <ol class="breadcrumb-list">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li class="separator"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="active">Calendario & Risultati</li>
+          </ol>
+        </nav>
+        <span class="page-banner-badge"><i class="fa-solid fa-calendar-check"></i> STAGIONE AGONISTICA 2026 / 2027</span>
+        <h1 class="page-banner-title">Calendario <span class="gradient-text">Gare & Risultati</span></h1>
+        <p class="page-banner-desc">
+          Resta sempre aggiornato sugli impegni della Wellfit Union Sport. Consulta le date dei prossimi turni, i risultati ufficiali e le classifiche FIP del girone.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calendario Gare e Risultati -->
+    <section class="section section-calendar" id="calendario">
+      <div class="container">
+        
+        <!-- Match Tabs Control -->
+        <div class="schedule-controls">
+          <div class="tab-group" role="tablist">
+            <button class="tab-btn active" data-filter-status="upcoming" role="tab" aria-selected="true">
+              <i class="fa-regular fa-clock"></i> Prossimi Impegni
+            </button>
+            <button class="tab-btn" data-filter-status="results" role="tab" aria-selected="false">
+              <i class="fa-solid fa-square-poll-vertical"></i> Ultimi Risultati
+            </button>
+          </div>
+
+          <div class="category-filters">
+            <span class="filter-label">Filtra per Categoria:</span>
+            <button class="filter-pill active" data-category-filter="all">Tutte</button>
+            <button class="filter-pill" data-category-filter="senior">Senior</button>
+            <button class="filter-pill" data-category-filter="under14">Under 14</button>
+            <button class="filter-pill" data-category-filter="minibasket">Minibasket</button>
+          </div>
+        </div>
+
+        <!-- Matches Cards Container -->
+        <div class="matches-list" id="matchesContainer">
+          
+          <!-- Upcoming 1 (Senior - Casa) -->
+          <div class="match-card upcoming" data-team="senior">
+            <div class="match-status-col">
+              <span class="match-badge badge-home"><i class="fa-solid fa-house"></i> CASA</span>
+              <span class="match-category">Prima Squadra Senior</span>
+            </div>
+            <div class="match-teams-col">
+              <div class="team-side team-home">
+                <span class="team-name highlight">Wellfit Union Sport</span>
+                <span class="team-logo-small"><i class="fa-solid fa-shield-halved"></i></span>
+              </div>
+              <div class="match-vs-box">
+                <span class="vs-text">VS</span>
+                <span class="match-time-tag">20:30</span>
+              </div>
+              <div class="team-side team-away">
+                <span class="team-logo-small"><i class="fa-solid fa-shield"></i></span>
+                <span class="team-name">Oderzo Basket</span>
+              </div>
+            </div>
+            <div class="match-meta-col">
+              <div class="meta-row"><i class="fa-regular fa-calendar"></i> <strong>Sabato 24 Ottobre 2026</strong></div>
+              <div class="meta-row"><i class="fa-solid fa-location-dot"></i> Palasport Breda di Piave, TV</div>
+            </div>
+            <div class="match-action-col">
+              <a href="contatti.html" class="btn btn-outline btn-xs"><i class="fa-solid fa-map-location-dot"></i> Come Arrivare</a>
+            </div>
+          </div>
+
+          <!-- Upcoming 2 (Under 14 - Trasferta) -->
+          <div class="match-card upcoming" data-team="under14">
+            <div class="match-status-col">
+              <span class="match-badge badge-away"><i class="fa-solid fa-plane"></i> TRASFERTA</span>
+              <span class="match-category">Under 14 FIP</span>
+            </div>
+            <div class="match-teams-col">
+              <div class="team-side team-home">
+                <span class="team-name">Polisportiva Mogliano</span>
+                <span class="team-logo-small"><i class="fa-solid fa-shield"></i></span>
+              </div>
+              <div class="match-vs-box">
+                <span class="vs-text">VS</span>
+                <span class="match-time-tag">11:00</span>
+              </div>
+              <div class="team-side team-away">
+                <span class="team-logo-small"><i class="fa-solid fa-shield-halved"></i></span>
+                <span class="team-name highlight">Wellfit Union Sport</span>
+              </div>
+            </div>
+            <div class="match-meta-col">
+              <div class="meta-row"><i class="fa-regular fa-calendar"></i> <strong>Domenica 25 Ottobre 2026</strong></div>
+              <div class="meta-row"><i class="fa-solid fa-location-dot"></i> Palazzetto Comunale, Mogliano Veneto</div>
+            </div>
+            <div class="match-action-col">
+              <span class="badge-tag info">Campionato FIP</span>
+            </div>
+          </div>
+
+          <!-- Upcoming 3 (Minibasket - Casa) -->
+          <div class="match-card upcoming" data-team="minibasket">
+            <div class="match-status-col">
+              <span class="match-badge badge-home"><i class="fa-solid fa-star"></i> EVENTO</span>
+              <span class="match-category">Minibasket Aquilotti</span>
+            </div>
+            <div class="match-teams-col">
+              <div class="team-side team-home">
+                <span class="team-name highlight">Wellfit Mini-Bears</span>
+                <span class="team-logo-small"><i class="fa-solid fa-basketball"></i></span>
+              </div>
+              <div class="match-vs-box">
+                <span class="vs-text">VS</span>
+                <span class="match-time-tag">15:30</span>
+              </div>
+              <div class="team-side team-away">
+                <span class="team-logo-small"><i class="fa-solid fa-basketball"></i></span>
+                <span class="team-name">Treviso Basket Young</span>
+              </div>
+            </div>
+            <div class="match-meta-col">
+              <div class="meta-row"><i class="fa-regular fa-calendar"></i> <strong>Sabato 31 Ottobre 2026</strong></div>
+              <div class="meta-row"><i class="fa-solid fa-location-dot"></i> Palestra Scuole Medie Breda di Piave</div>
+            </div>
+            <div class="match-action-col">
+              <span class="badge-tag accent">Festa Minibasket</span>
+            </div>
+          </div>
+
+          <!-- Upcoming 4 (Senior - Casa) -->
+          <div class="match-card upcoming" data-team="senior">
+            <div class="match-status-col">
+              <span class="match-badge badge-home"><i class="fa-solid fa-house"></i> CASA</span>
+              <span class="match-category">Prima Squadra Senior</span>
+            </div>
+            <div class="match-teams-col">
+              <div class="team-side team-home">
+                <span class="team-name highlight">Wellfit Union Sport</span>
+                <span class="team-logo-small"><i class="fa-solid fa-shield-halved"></i></span>
+              </div>
+              <div class="match-vs-box">
+                <span class="vs-text">VS</span>
+                <span class="match-time-tag">20:30</span>
+              </div>
+              <div class="team-side team-away">
+                <span class="team-logo-small"><i class="fa-solid fa-shield"></i></span>
+                <span class="team-name">Roncade Basket</span>
+              </div>
+            </div>
+            <div class="match-meta-col">
+              <div class="meta-row"><i class="fa-regular fa-calendar"></i> <strong>Sabato 7 Novembre 2026</strong></div>
+              <div class="meta-row"><i class="fa-solid fa-location-dot"></i> Palasport Breda di Piave, TV</div>
+            </div>
+            <div class="match-action-col">
+              <a href="contatti.html" class="btn btn-outline btn-xs"><i class="fa-solid fa-bell"></i> Ricordamelo</a>
+            </div>
+          </div>
+
+          <!-- Result 1 (Senior - Won) -->
+          <div class="match-card result hidden" data-team="senior">
+            <div class="match-status-col">
+              <span class="match-badge badge-win"><i class="fa-solid fa-check"></i> VITTORIA</span>
+              <span class="match-category">Prima Squadra Senior</span>
+            </div>
+            <div class="match-teams-col">
+              <div class="team-side team-home">
+                <span class="team-name highlight">Wellfit Union Sport</span>
+                <span class="team-logo-small"><i class="fa-solid fa-shield-halved"></i></span>
+              </div>
+              <div class="match-score-box win-highlight">
+                <span class="score-number">78</span>
+                <span class="score-dash">-</span>
+                <span class="score-number">71</span>
+              </div>
+              <div class="team-side team-away">
+                <span class="team-logo-small"><i class="fa-solid fa-shield"></i></span>
+                <span class="team-name">Conegliano Basket 90</span>
+              </div>
+            </div>
+            <div class="match-meta-col">
+              <div class="meta-row"><i class="fa-regular fa-calendar"></i> 17 Ottobre 2026</div>
+              <div class="meta-row"><i class="fa-solid fa-location-dot"></i> Palasport Breda di Piave</div>
+            </div>
+            <div class="match-action-col">
+              <span class="badge-tag win">+7 Punti</span>
+            </div>
+          </div>
+
+          <!-- Result 2 (Under 14 - Won) -->
+          <div class="match-card result hidden" data-team="under14">
+            <div class="match-status-col">
+              <span class="match-badge badge-win"><i class="fa-solid fa-check"></i> VITTORIA</span>
+              <span class="match-category">Under 14 FIP</span>
+            </div>
+            <div class="match-teams-col">
+              <div class="team-side team-home">
+                <span class="team-name">Basket Castelfranco</span>
+                <span class="team-logo-small"><i class="fa-solid fa-shield"></i></span>
+              </div>
+              <div class="match-score-box win-highlight">
+                <span class="score-number">58</span>
+                <span class="score-dash">-</span>
+                <span class="score-number">66</span>
+              </div>
+              <div class="team-side team-away">
+                <span class="team-logo-small"><i class="fa-solid fa-shield-halved"></i></span>
+                <span class="team-name highlight">Wellfit Union Sport</span>
+              </div>
+            </div>
+            <div class="match-meta-col">
+              <div class="meta-row"><i class="fa-regular fa-calendar"></i> 11 Ottobre 2026</div>
+              <div class="meta-row"><i class="fa-solid fa-location-dot"></i> Palasport Castelfranco V.to</div>
+            </div>
+            <div class="match-action-col">
+              <span class="badge-tag win">Grande rimonta!</span>
+            </div>
+          </div>
+
+          <!-- Result 3 (Minibasket - Amichevole) -->
+          <div class="match-card result hidden" data-team="minibasket">
+            <div class="match-status-col">
+              <span class="match-badge badge-fun"><i class="fa-solid fa-heart"></i> GIOCO</span>
+              <span class="match-category">Minibasket Scoiattoli</span>
+            </div>
+            <div class="match-teams-col">
+              <div class="team-side team-home">
+                <span class="team-name highlight">Wellfit Piccoli</span>
+                <span class="team-logo-small"><i class="fa-solid fa-basketball"></i></span>
+              </div>
+              <div class="match-score-box">
+                <span class="score-label">14 Tempi a 10</span>
+              </div>
+              <div class="team-side team-away">
+                <span class="team-logo-small"><i class="fa-solid fa-basketball"></i></span>
+                <span class="team-name">Silea Basket Mini</span>
+              </div>
+            </div>
+            <div class="match-meta-col">
+              <div class="meta-row"><i class="fa-regular fa-calendar"></i> 04 Ottobre 2026</div>
+              <div class="meta-row"><i class="fa-solid fa-location-dot"></i> Palestra Scuole Medie Breda</div>
+            </div>
+            <div class="match-action-col">
+              <span class="badge-tag accent">Tanti Sorrisi</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sezione Classifiche con Tabella FIP -->
+        <div class="standings-wrapper" id="classifiche" style="margin-top: 50px;">
+          <div class="standings-header">
+            <div class="standings-title-box">
+              <span class="standings-tag"><i class="fa-solid fa-ranking-star"></i> FEDERAZIONE ITALIANA PALLACANESTRO</span>
+              <h3 class="standings-title">Classifica Ufficiale - Girone Treviso / Marca</h3>
+              <p class="standings-sub">Aggiornata all'ultimo turno di campionato disputato</p>
+            </div>
+            <a href="https://www.fip.it" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm fip-ext-link">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Portale FIP Ufficiale
+            </a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="standings-table" aria-label="Classifica campionato">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Pos</th>
+                  <th scope="col">Squadra</th>
+                  <th scope="col" class="text-center">Punti</th>
+                  <th scope="col" class="text-center">G</th>
+                  <th scope="col" class="text-center">V</th>
+                  <th scope="col" class="text-center">P</th>
+                  <th scope="col" class="text-center mobile-hide">PF</th>
+                  <th scope="col" class="text-center mobile-hide">PS</th>
+                  <th scope="col" class="text-center">Diff</th>
+                  <th scope="col" class="text-center">Stato</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="highlight-row">
+                  <td class="text-center pos-col"><span class="pos-badge pos-1">1</span></td>
+                  <td class="team-cell">
+                    <strong>🏀 Wellfit Union Sport (Breda)</strong>
+                  </td>
+                  <td class="text-center pts-col"><strong>16</strong></td>
+                  <td class="text-center">9</td>
+                  <td class="text-center text-success"><strong>8</strong></td>
+                  <td class="text-center text-danger">1</td>
+                  <td class="text-center mobile-hide">682</td>
+                  <td class="text-center mobile-hide">594</td>
+                  <td class="text-center text-success">+88</td>
+                  <td class="text-center"><span class="table-status-pill playoff">Playoff</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center pos-col"><span class="pos-badge">2</span></td>
+                  <td class="team-cell">Oderzo Basket 1990</td>
+                  <td class="text-center pts-col"><strong>14</strong></td>
+                  <td class="text-center">9</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center">2</td>
+                  <td class="text-center mobile-hide">640</td>
+                  <td class="text-center mobile-hide">580</td>
+                  <td class="text-center text-success">+60</td>
+                  <td class="text-center"><span class="table-status-pill playoff">Playoff</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center pos-col"><span class="pos-badge">3</span></td>
+                  <td class="team-cell">Roncade Basket</td>
+                  <td class="text-center pts-col"><strong>12</strong></td>
+                  <td class="text-center">9</td>
+                  <td class="text-center">6</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center mobile-hide">615</td>
+                  <td class="text-center mobile-hide">588</td>
+                  <td class="text-center text-success">+27</td>
+                  <td class="text-center"><span class="table-status-pill playoff">Playoff</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center pos-col"><span class="pos-badge">4</span></td>
+                  <td class="team-cell">Polisportiva Mogliano</td>
+                  <td class="text-center pts-col"><strong>10</strong></td>
+                  <td class="text-center">9</td>
+                  <td class="text-center">5</td>
+                  <td class="text-center">4</td>
+                  <td class="text-center mobile-hide">602</td>
+                  <td class="text-center mobile-hide">610</td>
+                  <td class="text-center text-danger">-8</td>
+                  <td class="text-center"><span class="table-status-pill">Poule</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center pos-col"><span class="pos-badge">5</span></td>
+                  <td class="team-cell">Conegliano Basket 90</td>
+                  <td class="text-center pts-col"><strong>8</strong></td>
+                  <td class="text-center">9</td>
+                  <td class="text-center">4</td>
+                  <td class="text-center">5</td>
+                  <td class="text-center mobile-hide">589</td>
+                  <td class="text-center mobile-hide">605</td>
+                  <td class="text-center text-danger">-16</td>
+                  <td class="text-center"><span class="table-status-pill">Poule</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center pos-col"><span class="pos-badge">6</span></td>
+                  <td class="team-cell">Basket Castelfranco Veneto</td>
+                  <td class="text-center pts-col"><strong>4</strong></td>
+                  <td class="text-center">9</td>
+                  <td class="text-center">2</td>
+                  <td class="text-center">7</td>
+                  <td class="text-center mobile-hide">554</td>
+                  <td class="text-center mobile-hide">622</td>
+                  <td class="text-center text-danger">-68</td>
+                  <td class="text-center"><span class="table-status-pill">Salvezza</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="standings-footer-note">
+            <i class="fa-solid fa-circle-info"></i> La classifica completa di tutte le categorie giovanili e senior è consultabile in bacheca al Palasport di Breda di Piave o sul portale regionale FIP Veneto.
+          </div>
+        </div>
+
+        <!-- Info Palasport per i Tifosi -->
+        <div class="open-day-banner" style="margin-top: 45px;">
+          <div class="banner-icon"><i class="fa-solid fa-ticket"></i></div>
+          <div class="banner-text">
+            <h4>Ingresso Sempre Libero al Palazzetto di Breda di Piave!</h4>
+            <p>Tutte le partite casalinghe di Prima Squadra, Under 14 e Minibasket sono a <strong>ingresso gratuito</strong>. Vieni a sostenere i nostri atleti con amici e famiglia!</p>
+          </div>
+          <a href="contatti.html" class="btn btn-primary banner-cta"><i class="fa-solid fa-location-dot"></i> Indicazioni Sede</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-col footer-about">
+          <div class="brand-logo footer-logo">
+            <div class="logo-shield">
+              <i class="fa-solid fa-basketball logo-ball-icon"></i>
+              <span class="logo-wings">WUS</span>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">WELLFIT <span class="accent-color">UNION SPORT</span></span>
+              <span class="brand-sub">BREDA DI PIAVE (TREVISO)</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Associazione Sportiva Dilettantistica affiliata alla Federazione Italiana Pallacanestro (FIP). Promuoviamo lo sport, la socialità e il benessere fisico attraverso il basket dal minibasket al settore senior.
+          </p>
+          <div class="footer-social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://wa.me/393471234567" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Navigazione</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home Page</a></li>
+            <li><a href="squadre.html"><i class="fa-solid fa-angle-right"></i> Categorie e Squadre</a></li>
+            <li><a href="calendario.html"><i class="fa-solid fa-angle-right"></i> Calendario Partite</a></li>
+            <li><a href="galleria.html"><i class="fa-solid fa-angle-right"></i> Galleria Foto</a></li>
+            <li><a href="sponsor.html"><i class="fa-solid fa-angle-right"></i> Sostenitori & Sponsor</a></li>
+            <li><a href="contatti.html"><i class="fa-solid fa-angle-right"></i> Contatti & Dove Siamo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Le Nostre Categorie</h4>
+          <ul class="footer-links">
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="minibasket"><i class="fa-solid fa-shapes"></i> Minibasket (5 - 11 anni)</a></li>
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="under14"><i class="fa-solid fa-user-group"></i> Under 14 FIP Treviso</a></li>
+            <li><a href="squadre.html" class="cta-preselect" data-category-select="senior"><i class="fa-solid fa-star"></i> Prima Squadra Senior</a></li>
+            <li><a href="contatti.html"><i class="fa-solid fa-calendar-plus"></i> Prove Gratuite Open Day</a></li>
+            <li><a href="sponsor.html"><i class="fa-solid fa-handshake"></i> Diventa Sponsor</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Dati Societari</h4>
+          <p class="footer-tax-info">
+            <strong>A.S.D. Wellfit Union Sport</strong><br>
+            Palazzetto dello Sport - Via delle Magnolie<br>
+            31030 Breda di Piave (TV)<br>
+            C.F. / P.IVA: 04891230268<br>
+            Codice Affiliazione FIP: 054129
+          </p>
+          <div class="fip-logo-badge">
+            <i class="fa-solid fa-shield-halved"></i> Società Affiliata FIP Veneto
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 Wellfit Union Sport Breda di Piave. Tutti i diritti riservati.</p>
+        <p class="footer-credits">
+          Passione per il Basket • Sviluppato per la comunità di Breda di Piave
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="backToTopBtn" aria-label="Torna su">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript Script -->
+  <script src="js/main.js"></script>
+</body>
+</html>
