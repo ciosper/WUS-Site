@@ -1,7 +1,7 @@
 # 🏀 WUS Site — Wellfit Union Sport
 
 Sito web ufficiale e moderno per la società di pallacanestro **Wellfit Union Sport** (Breda di Piave, Treviso).  
-Il progetto è pronto all'uso, completamente responsive (perfetto su smartphone, tablet e computer) e **non richiede alcuna configurazione complessa o dipendenza pesante** per essere eseguito.
+Il progetto è pronto all'uso e **non richiede alcuna configurazione complessa o dipendenza pesante** per essere eseguito.
 
 ---
 
@@ -84,23 +84,6 @@ Se disponi già di strumenti di sviluppo sul tuo computer:
 
 ---
 
-## 🌐 Come Pubblicare il Sito Gratis su Internet (GitHub Pages)
-
-Vuoi condividere il sito con amici, atleti e dirigenti con un link pubblico senza dover inviare file ZIP? Puoi attivare **GitHub Pages** gratuitamente in 30 secondi:
-
-1. Vai sulla tua repository su GitHub.
-2. Clicca sulla scheda **Settings** (Impostazioni) in alto.
-3. Nel menu a sinistra, clicca su **Pages**.
-4. Sotto la voce **Build and deployment**:
-   - In *Source* seleziona **Deploy from a branch**.
-   - Sotto *Branch*, seleziona **main** (o *master*) e la cartella **/ (root)**.
-   - Clicca su **Save**.
-5. Attendi circa 1-2 minuti e ricarica la pagina: GitHub ti fornirà un link pubblico del tipo:  
-   👉 `https://tuo-username.github.io/WUS-Site/`
-6. Condividi questo link con chiunque: il sito sarà visibile da qualsiasi smartphone e computer!
-
----
-
 ## 📁 Struttura delle Cartelle e dei File
 
 ```text
@@ -127,16 +110,6 @@ WUS-Site/
 └── assets/
     └── images/           # Immagini del sito, squadre, palazzetto e loghi
 ```
-
----
-
-## 🎨 Come Modificare e Personalizzare i Contenuti
-
-- **Testi e Informazioni**: Apri i file `.html` con un qualsiasi editor di testo (Blocco Note, VS Code, Notepad++) e modifica i testi tra i tag HTML.
-- **Immagini**: Puoi sostituire le immagini all'interno della cartella `assets/images/` mantenendo lo stesso nome file o aggiornando il percorso nei file `.html`.
-- **Colori e Stile**: Tutti i colori principali e le spaziature sono definiti nelle variabili CSS all'inizio del file `css/style.css`.
-
----
 
 ## 💻 Tecnologie Utilizzate
 
