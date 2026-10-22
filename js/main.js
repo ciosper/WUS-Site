@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initGalleryAndLightbox();
   initContactForm();
   initBackToTop();
+  initFipStandingsSync();
+  initFullScheduleFilter();
 });
 
 /* ==========================================================================
@@ -132,7 +134,7 @@ const teamData = {
       { group: 'Allenamento Tecnico 1', days: 'Martedì', hours: '17:30 - 19:30' },
       { group: 'Allenamento Tecnico 2', days: 'Giovedì', hours: '17:30 - 19:30' },
       { group: 'Preparazione Atletica & Tiro', days: 'Venerdì', hours: '17:00 - 18:30' },
-      { group: 'Gara Ufficiale di Campionato', days: 'Domenica mattina', hours: 'Casa o Trasferta' }
+      { group: 'Gara Ufficiale di Campionato', days: 'Sabato pomeriggio', hours: 'Ore 16:00 (Casa: Palestra Sc. Medie Breda)' }
     ],
     requirements: 'Visita medico-sportiva agonistica obbligatoria rilasciata da centro accreditato.'
   },
@@ -296,6 +298,7 @@ function initScheduleAndResults() {
   const tabBtns = document.querySelectorAll('.tab-btn[data-filter-status]');
   const categoryPills = document.querySelectorAll('.category-filters .filter-pill');
   const matchCards = document.querySelectorAll('.match-card');
+  if (!tabBtns.length && !categoryPills.length) return;
 
   let currentStatus = 'upcoming'; // 'upcoming' or 'results'
   let currentCategory = 'all';    // 'all', 'senior', 'under14', 'minibasket'
@@ -593,6 +596,110 @@ function initBackToTop() {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
+    });
+  });
+}
+
+/* ==========================================================================
+   11. FIP Live Standings Dynamic Sync (Progressive Enhancement)
+   ========================================================================== */
+function initFipStandingsSync() {
+  const standingsTable = document.querySelector('.standings-table');
+  if (!standingsTable) return;
+
+  const fipApiUrl = 'https://backend.fip.it/api/v1/classifica?comitato_codice=PTV&regione_codice=VE&sesso=M&codice_campionato=1DM&codice_fase=1&codice_girone=86006';
+
+  fetch(fipApiUrl)
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.json();
+    })
+    .then(data => {
+      if (!Array.isArray(data) || data.length === 0) return;
+
+      const tbody = standingsTable.querySelector('tbody');
+      if (!tbody) return;
+
+      // Sort by position or ranking criteria
+      const sorted = [...data].sort((a, b) => (a.posizione || 99) - (b.posizione || 99));
+
+      tbody.innerHTML = sorted.map((team, idx) => {
+        const pos = team.posizione || (idx + 1);
+        const name = (team.nome_squadra || '').toUpperCase();
+        const fullName = team.squadra_nome || name;
+        const city = team.squadra_sede_citta ? ` (${team.squadra_sede_citta})` : '';
+        const fipCode = team.squadra_codice ? ` • Cod. FIP ${team.squadra_codice}` : '';
+        const isWellfit = name.includes('WELLFIT');
+        const pts = team.punti_classifica ?? 0;
+        const g = team.disputate ?? 0;
+        const v = team.vinte ?? 0;
+        const p = team.perse ?? 0;
+        const pf = team.punti_segnati ?? 0;
+        const ps = team.punti_subiti ?? 0;
+        const diff = pf - ps;
+        const diffClass = diff > 0 ? 'text-success' : (diff < 0 ? 'text-danger' : '');
+        const diffSign = diff > 0 ? `+${diff}` : diff;
+
+        return `
+          <tr class="${isWellfit ? 'highlight-row' : ''}">
+            <td class="text-center pos-col">
+              <span class="pos-badge ${isWellfit ? 'pos-highlight' : ''}">${isWellfit ? '<i class="fa-solid fa-shield-halved"></i>' : pos}</span>
+            </td>
+            <td class="team-cell">
+              <strong>${isWellfit ? '🏀 ' : ''}${name}</strong>
+              <span class="team-subtext">${fullName}${city}${fipCode}${isWellfit ? ' • Nostra Squadra' : ''}</span>
+            </td>
+            <td class="text-center pts-col"><strong>${pts}</strong></td>
+            <td class="text-center">${g}</td>
+            <td class="text-center ${v > 0 ? 'text-success' : ''}"><strong>${v}</strong></td>
+            <td class="text-center ${p > 0 ? 'text-danger' : ''}">${p}</td>
+            <td class="text-center mobile-hide">${pf}</td>
+            <td class="text-center mobile-hide">${ps}</td>
+            <td class="text-center ${diffClass}">${diffSign}</td>
+            <td class="text-center">
+              <span class="table-status-pill ${isWellfit ? 'playoff' : ''}">${isWellfit ? 'In Gara' : 'TV Ovest'}</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    })
+    .catch(() => {
+      // Gracefully silent: the pre-rendered HTML fallback already contains full official FIP data
+    });
+}
+
+/* ==========================================================================
+   12. Full DR3 Schedule Round & Venue Filter
+   ========================================================================== */
+function initFullScheduleFilter() {
+  const wrappers = document.querySelectorAll('.standings-wrapper');
+  if (!wrappers.length) return;
+
+  wrappers.forEach(wrapper => {
+    const filterBtns = wrapper.querySelectorAll('.schedule-filter-bar button[data-schedule-tab]');
+    const rows = wrapper.querySelectorAll('tbody tr.schedule-row');
+    if (!filterBtns.length || !rows.length) return;
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-schedule-tab');
+        rows.forEach(row => {
+          const phase = row.getAttribute('data-phase');
+          const venue = row.getAttribute('data-venue');
+          let show = false;
+
+          if (filter === 'all') show = true;
+          else if (filter === 'casa') show = (venue === 'casa');
+          else if (filter === 'trasferta') show = (venue === 'trasferta');
+          else if (filter === 'andata') show = (phase === 'andata');
+          else if (filter === 'ritorno') show = (phase === 'ritorno');
+
+          row.style.display = show ? '' : 'none';
+        });
+      });
     });
   });
 }
