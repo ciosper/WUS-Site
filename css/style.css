@@ -2908,3 +2908,39 @@ button, input, select, textarea {
   }
 }
 
+/* Dynamic Calendar & Next Match Engine Styling */
+.schedule-row.is-next-match {
+  background: rgba(255, 96, 0, 0.08) !important;
+  border-left: 3px solid var(--orange-primary) !important;
+  box-shadow: inset 0 0 15px rgba(255, 96, 0, 0.05);
+}
+
+.next-match-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 96, 0, 0.2);
+  color: var(--orange-light);
+  border: 1px solid var(--orange-primary);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+.sim-date-banner {
+  background: #1e1b4b;
+  border-bottom: 2px solid #818cf8;
+  color: #c7d2fe;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+}
+

@@ -1,0 +1,38 @@
+name: Sincronizzazione Classifica FIP
+
+on:
+  schedule:
+    # Esegue ogni lunedì, martedì e venerdì alle ore 06:00 UTC (dopo i turni di campionato del weekend)
+    - cron: '0 6 * * 1,2,5'
+  workflow_dispatch: # Permette l'avvio manuale con un clic dalla tab Actions di GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync-standings:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configurazione Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Esecuzione script di sincronizzazione FIP
+        run: node scripts/sync-fip.js
+
+      - name: Verifica e Commit modifiche
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions [FIP Bot]"
+          git add data/classifica-dr3.json
+          if git diff --staged --quiet; then
+            echo "Nessuna variazione nei dati della classifica FIP."
+          else
+            echo "Rilevati aggiornamenti nella classifica: eseguo commit e push."
+            git commit -m "chore: aggiornamento automatico classifica FIP [skip ci]"
+            git push
+          fi

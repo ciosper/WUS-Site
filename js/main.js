@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initFipStandingsSync();
   initFullScheduleFilter();
+  initDynamicNextMatches();
 });
 
 /* ==========================================================================
@@ -607,35 +608,40 @@ function initFipStandingsSync() {
   const standingsTable = document.querySelector('.standings-table');
   if (!standingsTable) return;
 
-  const fipApiUrl = 'https://backend.fip.it/api/v1/classifica?comitato_codice=PTV&regione_codice=VE&sesso=M&codice_campionato=1DM&codice_fase=1&codice_girone=86006';
-
-  fetch(fipApiUrl)
-    .then(response => {
-      if (!response.ok) throw new Error('Network response was not ok');
-      return response.json();
+  // 1. First try local relative JSON synced by GitHub Action (no CORS issues)
+  // 2. Fallback to direct FIP API if available
+  fetch('./data/classifica-dr3.json')
+    .then(r => {
+      if (!r.ok) throw new Error('Local JSON not found');
+      return r.json();
+    })
+    .catch(() => {
+      return fetch('https://backend.fip.it/api/v1/classifica?comitato_codice=PTV&regione_codice=VE&sesso=M&codice_campionato=1DM&codice_fase=1&codice_girone=86006')
+        .then(r => r.json());
     })
     .then(data => {
-      if (!Array.isArray(data) || data.length === 0) return;
+      const standingsList = Array.isArray(data) ? data : (data && data.standings ? data.standings : null);
+      if (!standingsList || !standingsList.length) return;
 
       const tbody = standingsTable.querySelector('tbody');
       if (!tbody) return;
 
       // Sort by position or ranking criteria
-      const sorted = [...data].sort((a, b) => (a.posizione || 99) - (b.posizione || 99));
+      const sorted = [...standingsList].sort((a, b) => ((a.pos || a.posizione || 99) - (b.pos || b.posizione || 99)));
 
       tbody.innerHTML = sorted.map((team, idx) => {
-        const pos = team.posizione || (idx + 1);
-        const name = (team.nome_squadra || '').toUpperCase();
-        const fullName = team.squadra_nome || name;
-        const city = team.squadra_sede_citta ? ` (${team.squadra_sede_citta})` : '';
-        const fipCode = team.squadra_codice ? ` • Cod. FIP ${team.squadra_codice}` : '';
+        const pos = team.pos || team.posizione || (idx + 1);
+        const name = (team.team || team.nome_squadra || '').toUpperCase();
+        const fullName = team.full_name || team.squadra_nome || name;
+        const city = (team.city || team.squadra_sede_citta) ? ` (${team.city || team.squadra_sede_citta})` : '';
+        const fipCode = (team.fip_code || team.squadra_codice) ? ` • Cod. FIP ${team.fip_code || team.squadra_codice}` : '';
         const isWellfit = name.includes('WELLFIT');
-        const pts = team.punti_classifica ?? 0;
-        const g = team.disputate ?? 0;
-        const v = team.vinte ?? 0;
-        const p = team.perse ?? 0;
-        const pf = team.punti_segnati ?? 0;
-        const ps = team.punti_subiti ?? 0;
+        const pts = team.points ?? team.punti_classifica ?? 0;
+        const g = team.played ?? team.disputate ?? 0;
+        const v = team.won ?? team.vinte ?? 0;
+        const p = team.lost ?? team.perse ?? 0;
+        const pf = team.scored ?? team.punti_segnati ?? 0;
+        const ps = team.conceded ?? team.punti_subiti ?? 0;
         const diff = pf - ps;
         const diffClass = diff > 0 ? 'text-success' : (diff < 0 ? 'text-danger' : '');
         const diffSign = diff > 0 ? `+${diff}` : diff;
@@ -662,6 +668,14 @@ function initFipStandingsSync() {
           </tr>
         `;
       }).join('');
+
+      // Update subtitle with sync timestamp
+      if (data && data.updated_at_formatted) {
+        const sub = document.querySelector('#classifiche .standings-sub');
+        if (sub) {
+          sub.innerHTML = `FIP Comitato Territoriale di Treviso • Codice Campionato 1DM • Girone 86006 • <span style="color: var(--orange-light);"><i class="fa-solid fa-arrows-rotate"></i> Aggiornato: ${data.updated_at_formatted}</span>`;
+        }
+      }
     })
     .catch(() => {
       // Gracefully silent: the pre-rendered HTML fallback already contains full official FIP data
@@ -702,4 +716,193 @@ function initFullScheduleFilter() {
       });
     });
   });
+}
+
+/* ==========================================================================
+   13. Dynamic Calendar & Next Match Engine (Date-based Live Selector)
+   ========================================================================== */
+const SCHEDULE_DATA_DR3 = [
+  { round: '1ª Andata', datetime: '2026-10-22T21:00:00+02:00', date_formatted: 'Giovedì 22 Ottobre 2026', time_formatted: '21:00', venue_type: 'trasferta', home_team: 'Pall. Ormelle', away_team: 'Wellfit Union Sport', gym_name: 'P.C. - Palestra Comunale di Ormelle', gym_address: 'Via Capitello della Salute, 4 - Ormelle (TV)', fip_code: '008322' },
+  { round: '2ª Andata', datetime: '2026-10-30T21:15:00+01:00', date_formatted: 'Venerdì 30 Ottobre 2026', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Basket Club Miane', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008325' },
+  { round: '3ª Andata', datetime: '2026-11-06T21:15:00+01:00', date_formatted: 'Venerdì 6 Novembre 2026', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Pol. Salgareda', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008329' },
+  { round: '4ª Andata', datetime: '2026-11-13T21:15:00+01:00', date_formatted: 'Venerdì 13 Novembre 2026', time_formatted: '21:15', venue_type: 'trasferta', home_team: 'Pol. S. Giorgio Quinto', away_team: 'Wellfit Union Sport', gym_name: 'Palestra Scolastica \'Ciardi\'', gym_address: 'Via Marzabotto, 2 - Quinto di Treviso (TV)', fip_code: '008334' },
+  { round: '5ª Andata', datetime: '2026-11-20T21:15:00+01:00', date_formatted: 'Venerdì 20 Novembre 2026', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Basket Nervesa', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008339' },
+  { round: '6ª Andata', datetime: '2026-11-27T21:00:00+01:00', date_formatted: 'Venerdì 27 Novembre 2026', time_formatted: '21:00', venue_type: 'trasferta', home_team: 'Masutti-Vittorio V.to', away_team: 'Wellfit Union Sport', gym_name: 'Palazzetto dello Sport', gym_address: 'Piazza Aldo Moro - Vittorio Veneto (TV)', fip_code: '008343' },
+  { round: '7ª Andata', datetime: '2026-12-04T21:15:00+01:00', date_formatted: 'Venerdì 4 Dicembre 2026', time_formatted: '21:15', venue_type: 'trasferta', home_team: 'Pol. Godigese', away_team: 'Wellfit Union Sport', gym_name: 'Palasport Castello di Godego', gym_address: 'Via Piave, 12 - Castello di Godego (TV)', fip_code: '008348' },
+  { round: '8ª Andata', datetime: '2026-12-11T21:15:00+01:00', date_formatted: 'Venerdì 11 Dicembre 2026', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Att. Motorie La Torre', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008352' },
+  { round: '9ª Andata', datetime: '2026-12-18T21:15:00+01:00', date_formatted: 'Venerdì 18 Dicembre 2026', time_formatted: '21:15', venue_type: 'trasferta', home_team: 'Albaredo Insieme', away_team: 'Wellfit Union Sport', gym_name: 'Palazzetto dello Sport di Vedelago', gym_address: 'Via Papa Sarto, 16 - Vedelago (TV)', fip_code: '008356' },
+  { round: '1ª Ritorno', datetime: '2027-01-15T21:15:00+01:00', date_formatted: 'Venerdì 15 Gennaio 2027', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Pall. Ormelle', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008367' },
+  { round: '2ª Ritorno', datetime: '2027-01-22T21:15:00+01:00', date_formatted: 'Venerdì 22 Gennaio 2027', time_formatted: '21:15', venue_type: 'trasferta', home_team: 'Basket Club Miane', away_team: 'Wellfit Union Sport', gym_name: 'Palasport Comunale', gym_address: 'Via Cal di Mezzo - Miane (TV)', fip_code: '008370' },
+  { round: '3ª Ritorno', datetime: '2027-01-29T21:15:00+01:00', date_formatted: 'Venerdì 29 Gennaio 2027', time_formatted: '21:15', venue_type: 'trasferta', home_team: 'Pol. Salgareda', away_team: 'Wellfit Union Sport', gym_name: 'Palazzetto dello Sport di Salgareda', gym_address: 'Via Callunga, 1 - Salgareda (TV)', fip_code: '008374' },
+  { round: '4ª Ritorno', datetime: '2027-02-12T21:15:00+01:00', date_formatted: 'Venerdì 12 Febbraio 2027', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Pol. S. Giorgio Quinto', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008379' },
+  { round: '5ª Ritorno', datetime: '2027-02-19T21:15:00+01:00', date_formatted: 'Venerdì 19 Febbraio 2027', time_formatted: '21:15', venue_type: 'trasferta', home_team: 'Basket Nervesa', away_team: 'Wellfit Union Sport', gym_name: 'Palazzetto dello Sport', gym_address: 'Via Zoppolete - Nervesa della Battaglia (TV)', fip_code: '008384' },
+  { round: '6ª Ritorno', datetime: '2027-02-26T21:15:00+01:00', date_formatted: 'Venerdì 26 Febbraio 2027', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Masutti-Vittorio V.to', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008388' },
+  { round: '7ª Ritorno', datetime: '2027-03-05T21:15:00+01:00', date_formatted: 'Venerdì 5 Marzo 2027', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Pol. Godigese', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008393' },
+  { round: '8ª Ritorno', datetime: '2027-03-12T21:15:00+01:00', date_formatted: 'Venerdì 12 Marzo 2027', time_formatted: '21:15', venue_type: 'trasferta', home_team: 'Att. Motorie La Torre', away_team: 'Wellfit Union Sport', gym_name: 'Palestra Comunale', gym_address: 'Via Don Martino Bassani - Romano d\'Ezzelino (VI)', fip_code: '008397' },
+  { round: '9ª Ritorno', datetime: '2027-03-19T21:15:00+01:00', date_formatted: 'Venerdì 19 Marzo 2027', time_formatted: '21:15', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Albaredo Insieme', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '008401' }
+];
+
+const SCHEDULE_DATA_U14 = [
+  { round: '1ª Andata', datetime: '2026-10-11T16:00:00+02:00', date_formatted: 'Domenica 11 Ottobre 2026', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Nutribullet-Treviso', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006825' },
+  { round: '2ª Andata', datetime: '2026-10-18T16:00:00+02:00', date_formatted: 'Domenica 18 Ottobre 2026', time_formatted: '16:00', venue_type: 'trasferta', home_team: 'Priula Autofficina Spresiano', away_team: 'Wellfit Union Sport', gym_name: 'Palazzetto dello Sport di Spresiano', gym_address: 'Via Ugo Foscolo, 6 - Spresiano (TV)', fip_code: '006832' },
+  { round: '3ª Andata', datetime: '2026-10-24T16:00:00+02:00', date_formatted: 'Sabato 24 Ottobre 2026', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Att. Motorie M.B. Planet', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006834' },
+  { round: '5ª Andata', datetime: '2026-11-14T16:00:00+01:00', date_formatted: 'Sabato 14 Novembre 2026', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Valbelluna Basket', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006845' },
+  { round: '6ª Andata', datetime: '2026-11-21T17:00:00+01:00', date_formatted: 'Sabato 21 Novembre 2026', time_formatted: '17:00', venue_type: 'trasferta', home_team: 'U.S. Hesperia', away_team: 'Wellfit Union Sport', gym_name: 'Palestra \'San Bartolomeo\'', gym_address: 'Via San Bartolomeo, 1 - Treviso (TV)', fip_code: '006852' },
+  { round: '7ª Andata', datetime: '2026-11-28T16:00:00+01:00', date_formatted: 'Sabato 28 Novembre 2026', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Sporting Club Oderzo', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006853' },
+  { round: '4ª Andata', datetime: '2026-12-05T16:00:00+01:00', date_formatted: 'Sabato 5 Dicembre 2026', time_formatted: '16:00', venue_type: 'trasferta', home_team: 'Pall. Vittorio Veneto', away_team: 'Wellfit Union Sport', gym_name: 'Palestra Comunale di Tarzo', gym_address: 'Via Trevisani nel mondo - Tarzo (TV)', fip_code: '006840' },
+  { round: '8ª Andata', datetime: '2026-12-13T11:00:00+01:00', date_formatted: 'Domenica 13 Dicembre 2026', time_formatted: '11:00', venue_type: 'trasferta', home_team: 'Rucker Academy', away_team: 'Wellfit Union Sport', gym_name: 'Palasaccon', gym_address: 'Via San Felice, 1/N - San Vendemiano (TV)', fip_code: '006861' },
+  { round: '9ª Andata', datetime: '2026-12-19T16:00:00+01:00', date_formatted: 'Sabato 19 Dicembre 2026', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Pol. Salgareda', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006864' },
+  { round: '11ª Andata', datetime: '2027-01-16T16:00:00+01:00', date_formatted: 'Sabato 16 Gennaio 2027', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Pall.Carità', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006877' },
+  { round: '1ª Ritorno', datetime: '2027-01-23T16:00:00+01:00', date_formatted: 'Sabato 23 Gennaio 2027', time_formatted: '16:00', venue_type: 'trasferta', home_team: 'Nutribullet-Treviso', away_team: 'Wellfit Union Sport', gym_name: 'P.C. - Palestra Planck', gym_address: 'Via Franchini, 1 - Villorba (TV)', fip_code: '006881' },
+  { round: '2ª Ritorno', datetime: '2027-01-30T16:00:00+01:00', date_formatted: 'Sabato 30 Gennaio 2027', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Priula Autofficina Spresiano', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006887' },
+  { round: '3ª Ritorno', datetime: '2027-02-14T10:30:00+01:00', date_formatted: 'Domenica 14 Febbraio 2027', time_formatted: '10:30', venue_type: 'trasferta', home_team: 'Att. Motorie M.B. Planet', away_team: 'Wellfit Union Sport', gym_name: 'Palestra Scuola Elementare', gym_address: 'Via Stadio, 15 - Sedico (BL)', fip_code: '006888' },
+  { round: '4ª Ritorno', datetime: '2027-02-20T16:00:00+01:00', date_formatted: 'Sabato 20 Febbraio 2027', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Pall. Vittorio Veneto', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006894' },
+  { round: '5ª Ritorno', datetime: '2027-02-27T17:00:00+01:00', date_formatted: 'Sabato 27 Febbraio 2027', time_formatted: '17:00', venue_type: 'trasferta', home_team: 'Valbelluna Basket', away_team: 'Wellfit Union Sport', gym_name: 'Palasport \'De Mas\'', gym_address: 'Via Gabelli, 2 - Belluno (BL)', fip_code: '006900' },
+  { round: '6ª Ritorno', datetime: '2027-03-06T16:00:00+01:00', date_formatted: 'Sabato 6 Marzo 2027', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'U.S. Hesperia', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006906' },
+  { round: '7ª Ritorno', datetime: '2027-03-13T18:00:00+01:00', date_formatted: 'Sabato 13 Marzo 2027', time_formatted: '18:00', venue_type: 'trasferta', home_team: 'Sporting Club Oderzo', away_team: 'Wellfit Union Sport', gym_name: 'Palasport di Oderzo', gym_address: 'Via Pontremoli, 1 - Oderzo (TV)', fip_code: '006908' },
+  { round: '8ª Ritorno', datetime: '2027-03-20T16:00:00+01:00', date_formatted: 'Sabato 20 Marzo 2027', time_formatted: '16:00', venue_type: 'casa', home_team: 'Wellfit Union Sport', away_team: 'Rucker Academy', gym_name: 'Palestra Scuole Medie G. Galilei', gym_address: 'Via San Pio X, 33 - Breda di Piave (TV)', fip_code: '006916' },
+  { round: '9ª Ritorno', datetime: '2027-04-03T16:00:00+01:00', date_formatted: 'Sabato 3 Aprile 2027', time_formatted: '16:00', venue_type: 'trasferta', home_team: 'Pol. Salgareda', away_team: 'Wellfit Union Sport', gym_name: 'Palazzetto dello Sport di Salgareda', gym_address: 'Via Callunga, 1 - Salgareda (TV)', fip_code: '006919' },
+  { round: '11ª Ritorno', datetime: '2027-04-18T16:00:00+02:00', date_formatted: 'Domenica 18 Aprile 2027', time_formatted: '16:00', venue_type: 'trasferta', home_team: 'Pall.Carità', away_team: 'Wellfit Union Sport', gym_name: 'Palacave', gym_address: 'Via Cave (fraz. Fontane) - Villorba (TV)', fip_code: '006928' }
+];
+
+function initDynamicNextMatches() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const simParam = urlParams.get('simDate');
+  const now = simParam ? new Date(simParam) : new Date();
+
+  // If simulation mode active, show top banner
+  if (simParam && !document.querySelector('.sim-date-banner')) {
+    const banner = document.createElement('div');
+    banner.className = 'sim-date-banner';
+    banner.innerHTML = `<i class="fa-solid fa-flask"></i> Modalità Simulazione Data: <strong>${now.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</strong> <a href="${window.location.pathname}" style="color: #fff; margin-left: 10px; text-decoration: underline;">Ripristina data reale</a>`;
+    document.body.prepend(banner);
+  }
+
+  // Find next upcoming match (buffer of 3 hours after start time)
+  const isMatchUpcoming = m => (new Date(m.datetime).getTime() + 3 * 3600 * 1000) >= now.getTime();
+
+  const nextDR3 = SCHEDULE_DATA_DR3.find(isMatchUpcoming) || SCHEDULE_DATA_DR3[SCHEDULE_DATA_DR3.length - 1];
+  const nextU14 = SCHEDULE_DATA_U14.find(isMatchUpcoming) || SCHEDULE_DATA_U14[SCHEDULE_DATA_U14.length - 1];
+
+  function renderMatchCard(cardEl, match, categoryName, tagLabel, tagColor, calHash) {
+    if (!cardEl || !match) return;
+
+    const isHome = match.venue_type === 'casa';
+    const statusBadgeClass = isHome ? 'badge-home' : 'badge-away';
+    const statusIcon = isHome ? 'fa-house' : 'fa-plane';
+    const statusText = isHome ? 'IN CASA' : 'TRASFERTA';
+
+    const homeName = isHome ? 'Wellfit Union Sport' : match.home_team;
+    const awayName = isHome ? match.away_team : 'Wellfit Union Sport';
+    const homeIsHighlight = isHome ? 'highlight' : '';
+    const awayIsHighlight = !isHome ? 'highlight' : '';
+    const homeShield = isHome ? 'fa-shield-halved' : 'fa-shield';
+    const awayShield = !isHome ? 'fa-shield-halved' : 'fa-shield';
+
+    cardEl.innerHTML = `
+      <div class="match-status-col">
+        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+          <span class="match-badge ${statusBadgeClass}"><i class="fa-solid ${statusIcon}"></i> ${statusText}</span>
+          <span class="badge-tag" style="background: ${tagColor.bg}; color: ${tagColor.color}; border: 1px solid ${tagColor.border}; font-size: 0.72rem; padding: 2px 8px; font-weight: 700;">${tagLabel}</span>
+        </div>
+        <span class="match-category">${categoryName} (${match.round})</span>
+      </div>
+      <div class="match-teams-col">
+        <div class="team-side team-home">
+          <span class="team-name ${homeIsHighlight}">${homeName}</span>
+          <span class="team-logo-small"><i class="fa-solid ${homeShield}"></i></span>
+        </div>
+        <div class="match-vs-box">
+          <span class="vs-text">VS</span>
+          <span class="match-time-tag">${match.time_formatted}</span>
+        </div>
+        <div class="team-side team-away">
+          <span class="team-logo-small"><i class="fa-solid ${awayShield}"></i></span>
+          <span class="team-name ${awayIsHighlight}">${awayName}</span>
+        </div>
+      </div>
+      <div class="match-meta-col">
+        <div class="meta-row"><i class="fa-regular fa-calendar"></i> <strong>${match.date_formatted}</strong></div>
+        <div class="meta-row"><i class="fa-solid fa-location-dot"></i> ${match.gym_name}, ${match.gym_address}</div>
+      </div>
+      <div class="match-action-col">
+        <a href="calendario.html#${calHash}" class="btn btn-outline btn-xs"><i class="fa-solid fa-calendar-days"></i> Calendario ${tagLabel}</a>
+      </div>
+    `;
+  }
+
+  // 1. Home page cards
+  const homeCardDR3 = document.getElementById('homeFeaturedMatchDR3');
+  const homeCardU14 = document.getElementById('homeFeaturedMatchU14');
+
+  if (homeCardDR3) {
+    renderMatchCard(
+      homeCardDR3,
+      nextDR3,
+      'Divisione Regionale 3',
+      'DR3',
+      { bg: 'rgba(255, 96, 0, 0.16)', color: 'var(--orange-light)', border: 'rgba(255, 96, 0, 0.35)' },
+      'calendario-dr3'
+    );
+  }
+
+  if (homeCardU14) {
+    renderMatchCard(
+      homeCardU14,
+      nextU14,
+      'Under 14 Regionale',
+      'UNDER 14',
+      { bg: 'rgba(0, 180, 216, 0.16)', color: '#38bdf8', border: 'rgba(0, 180, 216, 0.35)' },
+      'calendario-u14'
+    );
+  }
+
+  // 2. Calendar page top cards
+  const calCardDR3 = document.getElementById('calendarUpcomingDR3');
+  const calCardU14 = document.getElementById('calendarUpcomingU14');
+
+  if (calCardDR3) {
+    renderMatchCard(
+      calCardDR3,
+      nextDR3,
+      'Divisione Regionale 3',
+      'DR3',
+      { bg: 'rgba(255, 96, 0, 0.16)', color: 'var(--orange-light)', border: 'rgba(255, 96, 0, 0.35)' },
+      'calendario-dr3'
+    );
+  }
+
+  if (calCardU14) {
+    renderMatchCard(
+      calCardU14,
+      nextU14,
+      'Under 14 Regionale',
+      'UNDER 14',
+      { bg: 'rgba(0, 180, 216, 0.16)', color: '#38bdf8', border: 'rgba(0, 180, 216, 0.35)' },
+      'calendario-u14'
+    );
+  }
+
+  // 3. Highlight next match row in full tables on calendario.html
+  function highlightTableRow(containerId, matchCode) {
+    const container = document.getElementById(containerId);
+    if (!container || !matchCode) return;
+    const rows = container.querySelectorAll('tr.schedule-row');
+    rows.forEach(row => {
+      const pill = row.querySelector('.fip-code-pill');
+      if (pill && pill.textContent.trim() === matchCode) {
+        row.classList.add('is-next-match');
+        const dateBox = row.querySelector('.schedule-date-box');
+        if (dateBox && !dateBox.querySelector('.next-match-indicator')) {
+          const tag = document.createElement('span');
+          tag.className = 'next-match-indicator';
+          tag.innerHTML = '<i class="fa-solid fa-star"></i> PROSSIMA GARA';
+          dateBox.appendChild(tag);
+        }
+      }
+    });
+  }
+
+  if (nextDR3) highlightTableRow('scheduleRowsContainer', nextDR3.fip_code);
+  if (nextU14) highlightTableRow('scheduleU14RowsContainer', nextU14.fip_code);
 }
