@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-03T13:06:36.971Z",
-  "updated_at_formatted": "martedì 3 novembre 2026 alle ore 14:06",
+  "updated_at": "2026-11-06T13:20:08.838Z",
+  "updated_at_formatted": "venerdì 6 novembre 2026 alle ore 14:20",
   "championship": "Divisione Regionale 3",
   "girone": "Girone TV Ovest",
   "comitato": "Treviso (PTV)",
@@ -26,6 +26,21 @@
     },
     {
       "pos": 2,
+      "team": "POL. GODIGESE",
+      "full_name": "POLISPORTIVA GODIGESE A.S.D.",
+      "city": "CASTELLO DI GODEGO",
+      "fip_code": "056144",
+      "points": 4,
+      "played": 2,
+      "won": 2,
+      "lost": 0,
+      "scored": 143,
+      "conceded": 92,
+      "diff": 51,
+      "penalties": 0
+    },
+    {
+      "pos": 3,
       "team": "POL. S.GIORGIO Quinto Tv",
       "full_name": "POL. S.GIORGIO A.S.DIL.",
       "city": "QUINTO DI TREVISO",
@@ -37,21 +52,6 @@
       "scored": 69,
       "conceded": 65,
       "diff": 4,
-      "penalties": 0
-    },
-    {
-      "pos": 3,
-      "team": "POL. GODIGESE",
-      "full_name": "POLISPORTIVA GODIGESE A.S.D.",
-      "city": "CASTELLO DI GODEGO",
-      "fip_code": "056144",
-      "points": 2,
-      "played": 1,
-      "won": 1,
-      "lost": 0,
-      "scored": 75,
-      "conceded": 47,
-      "diff": 28,
       "penalties": 0
     },
     {
@@ -71,21 +71,6 @@
     },
     {
       "pos": 5,
-      "team": "ALBAREDO INSIEME",
-      "full_name": "ASD ALBAREDO INSIEME",
-      "city": "VEDELAGO",
-      "fip_code": "056696",
-      "points": 2,
-      "played": 1,
-      "won": 1,
-      "lost": 0,
-      "scored": 65,
-      "conceded": 54,
-      "diff": 11,
-      "penalties": 0
-    },
-    {
-      "pos": 6,
       "team": "MASUTTI-Vittorio V.to",
       "full_name": "A.D. PALL. VITTORIO VENETO",
       "city": "VITTORIO VENETO",
@@ -97,6 +82,21 @@
       "scored": 125,
       "conceded": 127,
       "diff": -2,
+      "penalties": 0
+    },
+    {
+      "pos": 6,
+      "team": "ALBAREDO INSIEME",
+      "full_name": "ASD ALBAREDO INSIEME",
+      "city": "VEDELAGO",
+      "fip_code": "056696",
+      "points": 2,
+      "played": 2,
+      "won": 1,
+      "lost": 1,
+      "scored": 110,
+      "conceded": 122,
+      "diff": -12,
       "penalties": 0
     },
     {
